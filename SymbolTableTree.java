@@ -2,8 +2,6 @@ import java.util.*;
 
 public class SymbolTableTree
 {
-	private int size = 0;
-	
 	private class SymbolTableNode
 	{
 		public static final String GLOBAL_SCOPE = "GLOBAL";
@@ -57,7 +55,6 @@ public class SymbolTableTree
 			if (!symbolTable.contains(entryToAdd))
 			{
 				symbolTable.add(entryToAdd);
-				size++;
 			}
 		}
 		
@@ -210,29 +207,11 @@ public class SymbolTableTree
 		}
 	}
 	
-	public int getSize()
-	{
-		return size;
-	}
-	
 	public static SymbolTableTree getInstance()
 	{
 		if (instance == null)
 			instance = new SymbolTableTree();
 		
 		return instance;
-	}
-	
-	public static void main(String[] args)
-	{
-		// Various test cases in order to ensure the symbol table tree works as intended.
-		
-		SymbolTableTree.getInstance().addEntry(new SymbolTableEntry("butts", SymbolTableEntry.VARIABLE, SymbolTableEntry.INT, "123456"));
-		SymbolTableTree.getInstance().addEntry(new SymbolTableEntry("ButtFunc", SymbolTableEntry.FUNCTION, null, null));
-		SymbolTableTree.getInstance().addEntry(new SymbolTableEntry("ButtFuncInnerVar", SymbolTableEntry.VARIABLE, SymbolTableEntry.INT, "456789"), "ButtFunc");
-		
-		System.out.println(SymbolTableTree.getInstance().getEntry("butts").getName());
-		System.out.println(SymbolTableTree.getInstance().getEntry("ButtFuncInnerVar", "ButtFunc").getName());
-		System.out.println(SymbolTableTree.getInstance().contains("butts"));
 	}
 }
